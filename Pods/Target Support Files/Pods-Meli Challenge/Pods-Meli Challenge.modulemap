@@ -1,0 +1,6 @@
+framework module Pods_Meli_Challenge {
+  umbrella header "Pods-Meli Challenge-umbrella.h"
+
+  export *
+  module * { export * }
+}
