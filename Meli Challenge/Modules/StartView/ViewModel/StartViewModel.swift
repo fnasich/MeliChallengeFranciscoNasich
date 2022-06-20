@@ -12,8 +12,7 @@ class StartViewModel {
     private var delegate: StartViewDelegate
     private var service2: Top20Service
     private var service3: MultiGetService
-    private var top20 = [TopTwentyCategory]()
-    //    private var category: String?
+    var top20 = [TopTwentyCategory]()
     
     init(service: StartViewService, delegate: StartViewDelegate, service2: Top20Service, service3: MultiGetService) {
         self.service = service
@@ -38,7 +37,8 @@ class StartViewModel {
     func getTop20(categoryId: String) {
         service2.getTopTwenty(categoryId: categoryId) { top in
             let top = top
-            print(top)
+            self.top20 = top
+            print("ESTE ES EL TOP 20 \(top)")
             // Agregar llamado de servicio multiGet
             self.multiGet(productId: top)
         } onError: {
@@ -54,6 +54,14 @@ class StartViewModel {
             print("multiGet error")
         }
 
+    }
+    
+    func top20List(at index: Int) -> TopTwentyCategory {
+        top20[index]
+    }
+    
+    func top20Count() -> Int {
+        top20.count
     }
 }
 

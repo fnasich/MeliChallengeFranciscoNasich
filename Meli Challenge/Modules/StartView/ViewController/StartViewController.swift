@@ -35,21 +35,21 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
         searchArreglo = arreglo
         searchLabel.searchTextField.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         viewModel = StartViewModel(service: service, delegate: self, service2: service2, service3: service3)
-        //        viewModel?.getCategory()
     }
     
     
     // MARK: Number Of Rows In Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arreglo.count
+        print("CATEGORIAS COUNT: \(viewModel!.top20Count())")
+        return viewModel?.top20Count() ?? 0
     }
     
     // MARK: Cell For Row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? StartTableViewCell
-        cell?.label?.text = arreglo[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StartTableViewCell
+        cell.label?.text = self.viewModel?.top20List(at: indexPath.row).id
         
-        return cell ?? StartTableViewCell()
+        return cell
     }
     
     @IBAction func searchButton(_ sender: Any) {
@@ -66,18 +66,18 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     // MARK: Search Bar
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchArreglo = []
-        if searchText == "" {
-            searchArreglo = arreglo
-        } else {
-            for car in arreglo {
-                if car.lowercased().contains(searchText.lowercased()) {
-                    searchArreglo.append(car)
-                }
-            }
-        }
-    }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        searchArreglo = []
+//        if searchText == "" {
+//            searchArreglo = arreglo
+//        } else {
+//            for car in arreglo {
+//                if car.lowercased().contains(searchText.lowercased()) {
+//                    searchArreglo.append(car)
+//                }
+//            }
+//        }
+//    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         SearchTextManager.shared.searchValue = searchLabel.text!.lowercased()
