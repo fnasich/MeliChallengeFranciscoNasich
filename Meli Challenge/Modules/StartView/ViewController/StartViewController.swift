@@ -40,20 +40,15 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // MARK: Number Of Rows In Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("CATEGORIAS COUNT: \(viewModel!.top20Count())")
         return viewModel?.top20Count() ?? 0
     }
     
     // MARK: Cell For Row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StartTableViewCell
-        cell.label?.text = self.viewModel?.top20List(at: indexPath.row).id
+        cell.label?.text = self.viewModel?.productList(at: indexPath.row).id
         
         return cell
-    }
-    
-    @IBAction func searchButton(_ sender: Any) {
-        
     }
     
     // MARK: Did Select Row
@@ -67,6 +62,7 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: Search Bar Button Clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         SearchTextManager.shared.searchValue = searchLabel.text!.lowercased()
+        SearchTextManager.shared.multiGetId.removeAll()
         viewModel?.getCategory()
     }
 }
@@ -76,6 +72,5 @@ extension StartViewController: StartViewDelegate {
     func loadData() {
         tableView.reloadData()
     }
-    
     
 }

@@ -22,7 +22,7 @@ class Top20Service {
                                 print(str)
                         let decoder = JSONDecoder()
                         let categoryResponse = try decoder.decode(TopTwentyResponse.self, from: data)
-                        print(categoryResponse.content)
+//                        print("TOP 20 SERVICE: \(categoryResponse.content)")
                         onComplete(categoryResponse.content)
                     }else{
                         onError()

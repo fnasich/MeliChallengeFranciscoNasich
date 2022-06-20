@@ -12,6 +12,7 @@ class SearchTextManager {
     
     var searchValue: String?
     var categoryValue: String?
+    var multiGetId: [String] = []
     
     init(){}
 }

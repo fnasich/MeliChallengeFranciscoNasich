@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -37,39 +36,30 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.left" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NHJ-e8-yR3">
-                    <rect key="frame" x="20" y="59.5" width="30" height="25"/>
+                    <rect key="frame" x="20" y="57.5" width="30" height="25"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="Rda-aq-r0T"/>
                         <constraint firstAttribute="height" constant="30" id="Rt6-xa-Vga"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fE7-ph-gSL">
-                    <rect key="frame" x="364" y="60" width="40" height="25"/>
-                    <color key="backgroundColor" red="0.60545997429999998" green="0.70081479049999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9Cf-uG-yKq">
+                    <rect key="frame" x="364" y="56" width="30" height="28.5"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="25" id="3p8-W9-Mwe"/>
-                        <constraint firstAttribute="width" constant="40" id="pgJ-xh-AiV"/>
+                        <constraint firstAttribute="height" constant="30" id="STQ-Zv-hU0"/>
+                        <constraint firstAttribute="width" constant="30" id="bLg-tx-dhd"/>
                     </constraints>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="small" renderingMode="original"/>
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
-                    </state>
-                    <connections>
-                        <action selector="searchButton:" destination="-1" eventType="touchUpInside" id="cqh-V3-4pS"/>
-                    </connections>
-                </button>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="0.90196078431372551" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="cLw-V7-cCB" firstAttribute="top" secondItem="NHJ-e8-yR3" secondAttribute="bottom" constant="18" id="3yS-E5-SBk"/>
+                <constraint firstItem="cLw-V7-cCB" firstAttribute="top" secondItem="NHJ-e8-yR3" secondAttribute="bottom" constant="20" id="3yS-E5-SBk"/>
                 <constraint firstItem="cLw-V7-cCB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Be4-OS-P10"/>
-                <constraint firstItem="cLw-V7-cCB" firstAttribute="top" secondItem="fE7-ph-gSL" secondAttribute="bottom" constant="20" id="DGE-Hw-CUy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="i4H-3x-Lxz" secondAttribute="trailing" constant="56" id="OkR-4X-bSD"/>
-                <constraint firstItem="fE7-ph-gSL" firstAttribute="leading" secondItem="i4H-3x-Lxz" secondAttribute="trailing" constant="6" id="cuc-Sf-V6M"/>
+                <constraint firstItem="9Cf-uG-yKq" firstAttribute="leading" secondItem="i4H-3x-Lxz" secondAttribute="trailing" constant="6" id="SXA-5Z-CMj"/>
+                <constraint firstItem="cLw-V7-cCB" firstAttribute="top" secondItem="9Cf-uG-yKq" secondAttribute="bottom" constant="20.5" id="a6Z-AG-8Ia"/>
                 <constraint firstItem="i4H-3x-Lxz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="56" id="ehf-gs-FYi"/>
                 <constraint firstItem="i4H-3x-Lxz" firstAttribute="leading" secondItem="NHJ-e8-yR3" secondAttribute="trailing" constant="6" id="hpA-4f-XyO"/>
                 <constraint firstItem="cLw-V7-cCB" firstAttribute="top" secondItem="i4H-3x-Lxz" secondAttribute="bottom" constant="7" id="jOe-JB-ol2"/>
@@ -82,7 +72,7 @@
     </objects>
     <resources>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="cart" catalog="system" width="128" height="102"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
