@@ -8,7 +8,7 @@
 import Foundation
 
 class MultiGetService {
-    func multiGet(productId: TopTwentyCategory,onComplete: @escaping (MultiGet) -> Void, onError: @escaping (ErrorHandler)) {
+    func multiGet(productId: String,onComplete: @escaping ([MultiGet]) -> Void, onError: @escaping (ErrorHandler)) {
         let stringRepresentation = SearchTextManager.shared.multiGetId.joined(separator: ",")
         let url = Constants.multigetURL + stringRepresentation
             ApiManager.shared.get(url: url) {response in
@@ -18,11 +18,10 @@ class MultiGetService {
                     do{
                         
                         if let data = data{
-                            let str = String(decoding: data, as: UTF8.self)
-                                    print(str)
                             let decoder = JSONDecoder()
                             let multiGetResponse = try decoder.decode([MultiGetResponse].self, from: data)
-                            onComplete(multiGetResponse[0].body)
+                            let productsData = multiGetResponse.map {response in response.body}
+                            onComplete(productsData)
                         }else{
                             onError(genericError)
                         }

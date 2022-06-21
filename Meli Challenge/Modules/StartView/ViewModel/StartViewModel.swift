@@ -12,8 +12,8 @@ class StartViewModel {
     private var delegate: StartViewDelegate
     private var service2: Top20Service
     private var service3: MultiGetService
-    private var top20 = [TopTwentyCategory]()
-     var products: [MultiGet] = []
+    private var top20 = [String]()
+    private var products: [MultiGet] = []
     
     init(service: StartViewService, delegate: StartViewDelegate, service2: Top20Service, service3: MultiGetService) {
         self.service = service
@@ -42,19 +42,23 @@ class StartViewModel {
             self.products.removeAll()
             print("ESTE ES TOP: \(top)")
             top.forEach { topId in
-                SearchTextManager.shared.multiGetId.append("\(topId.id)")
-                self.service3.multiGet(productId: topId) { infoId in
-                    self.products.append(infoId)
-//                    print("INFO TOPID: \(infoId)")
-                } onError: {errorMessage in
-                    self.delegate.showMessage(message: errorMessage)
-                    print("ERROR TOP20 1")
-                }
+                self.getMultiGet(id: topId)
             }
         } onError: {
             self.delegate.showMessage(message: genericError)
-            print("ERROR TOP20 2")
+            print("ERROR TOP20")
         }
+    }
+    
+    func getMultiGet(id: String) {
+        SearchTextManager.shared.multiGetId.append(id)
+        self.service3.multiGet(productId: id) { infoId in
+            self.products.append(contentsOf: infoId)
+        } onError: { errorMessage in
+            self.delegate.showMessage(message: errorMessage)
+            print("ERROR MULTI GET")
+        }
+
     }
     
     func productList(at index: Int) -> MultiGet {

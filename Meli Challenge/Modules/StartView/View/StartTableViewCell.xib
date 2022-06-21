@@ -12,7 +12,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="164" id="KGk-i7-Jjw" customClass="StartTableViewCell" customModule="Meli_Challenge" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="418" height="164"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="418" height="164"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VZl-pF-tf6">
-                        <rect key="frame" x="11" y="13" width="131" height="131"/>
+                        <rect key="frame" x="11" y="14" width="131" height="131"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="131" id="2EW-rX-2yh"/>
                             <constraint firstAttribute="width" constant="131" id="lU8-jU-zsW"/>
@@ -54,20 +54,21 @@
                     <constraint firstItem="Tlu-VT-91m" firstAttribute="top" secondItem="tDQ-Xg-12z" secondAttribute="bottom" constant="2" id="8py-s6-2XL"/>
                     <constraint firstItem="VZl-pF-tf6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="Btm-P5-lFp"/>
                     <constraint firstItem="VwU-XU-BRR" firstAttribute="leading" secondItem="VZl-pF-tf6" secondAttribute="trailing" constant="10" id="OWv-wj-nMZ"/>
-                    <constraint firstAttribute="bottom" secondItem="VZl-pF-tf6" secondAttribute="bottom" constant="13" id="PdQ-VU-8Sc"/>
                     <constraint firstItem="VpG-pm-iJj" firstAttribute="leading" secondItem="VZl-pF-tf6" secondAttribute="trailing" constant="10" id="QBA-Re-cOd"/>
                     <constraint firstItem="Tlu-VT-91m" firstAttribute="leading" secondItem="VZl-pF-tf6" secondAttribute="trailing" constant="10" id="ULb-rM-Lhn"/>
                     <constraint firstItem="tDQ-Xg-12z" firstAttribute="top" secondItem="VpG-pm-iJj" secondAttribute="bottom" constant="4" id="WjB-U7-lu0"/>
                     <constraint firstAttribute="trailingMargin" secondItem="VwU-XU-BRR" secondAttribute="trailing" id="YKN-ym-hUK"/>
                     <constraint firstItem="VwU-XU-BRR" firstAttribute="top" secondItem="Tlu-VT-91m" secondAttribute="bottom" constant="2" id="agM-M9-PC4"/>
-                    <constraint firstItem="VZl-pF-tf6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="cni-ax-2q9"/>
+                    <constraint firstItem="VZl-pF-tf6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="cni-ax-2q9"/>
                     <constraint firstItem="tDQ-Xg-12z" firstAttribute="leading" secondItem="VZl-pF-tf6" secondAttribute="trailing" constant="10" id="eK7-3Z-aFa"/>
                     <constraint firstAttribute="trailing" secondItem="VpG-pm-iJj" secondAttribute="trailing" id="qqP-ji-hKd"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="condition" destination="Tlu-VT-91m" id="lhP-Dz-lOw"/>
                 <outlet property="imageCar" destination="VZl-pF-tf6" id="0gx-qa-hcd"/>
+                <outlet property="location" destination="VwU-XU-BRR" id="hc4-3s-Kdj"/>
                 <outlet property="priceProduct" destination="tDQ-Xg-12z" id="wUn-9Y-Iy4"/>
                 <outlet property="titleProduct" destination="VpG-pm-iJj" id="PyZ-ba-Czr"/>
             </connections>

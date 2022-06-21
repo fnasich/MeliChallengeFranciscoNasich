@@ -48,11 +48,15 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StartTableViewCell
         cell.titleProduct?.text = self.viewModel?.productList(at: indexPath.row).title
-        cell.priceProduct.text = self.viewModel?.productList(at: indexPath.row).id
+        cell.priceProduct.text = "\(String(describing: self.viewModel!.productList(at: indexPath.row).price))"
+        cell.condition.text = self.viewModel?.productList(at: indexPath.row).condition
         
-        //        if let url = self.viewModel?.productList(at: indexPath.row).thumbnail, let fullUrl = URL(string: url) {
-        //            cell.imageCar.load(url: fullUrl)
-        //        }
+        cell.location.text = self.viewModel?.productList(at: indexPath.row).seller_address.search_location.state.name
+        
+        
+        if let url = self.viewModel?.productList(at: indexPath.row).pictures[0].url, let fullUrl = URL(string: url) {
+            cell.imageCar.load(url: fullUrl)
+        }
         
         return cell
     }
@@ -68,9 +72,8 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: Search Bar Button Clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         SearchTextManager.shared.searchValue = searchLabel.text!.lowercased()
-        SearchTextManager.shared.multiGetId.removeAll()
+        //        SearchTextManager.shared.multiGetId.removeAll()
         viewModel?.getCategory()
-        tableView.reloadData()
     }
 }
 

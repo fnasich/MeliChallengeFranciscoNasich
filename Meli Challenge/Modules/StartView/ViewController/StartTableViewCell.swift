@@ -10,7 +10,8 @@ import UIKit
 class StartTableViewCell: UITableViewCell {
     @IBOutlet weak var titleProduct: UILabel!
     @IBOutlet weak var priceProduct: UILabel!
-    
+    @IBOutlet weak var condition: UILabel!
+    @IBOutlet weak var location: UILabel!
     @IBOutlet weak var imageCar: UIImageView!
     
     override func awakeFromNib() {

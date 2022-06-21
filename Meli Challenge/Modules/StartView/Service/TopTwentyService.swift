@@ -8,7 +8,7 @@
 import Foundation
 
 class Top20Service {
-    func getTopTwenty(categoryId: String,onComplete: @escaping ([TopTwentyCategory]) -> Void, onError: @escaping () -> Void) {
+    func getTopTwenty(categoryId: String,onComplete: @escaping ([String]) -> Void, onError: @escaping () -> Void) {
         let url = Constants.topTwentyURL + categoryId
         print(url)
         ApiManager.shared.get(url: url) {response in
@@ -22,8 +22,12 @@ class Top20Service {
                                 print(str)
                         let decoder = JSONDecoder()
                         let categoryResponse = try decoder.decode(TopTwentyResponse.self, from: data)
+                        var top20: [String] = []
+                        categoryResponse.content.map({ top in
+                            top20.append(top.id)
+                        })
 //                        print("TOP 20 SERVICE: \(categoryResponse.content)")
-                        onComplete(categoryResponse.content)
+                        onComplete(top20)
                     }else{
                         onError()
                     }

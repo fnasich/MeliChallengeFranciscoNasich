@@ -22,11 +22,29 @@ struct TopTwentyCategory: Decodable {
 
 struct MultiGetResponse: Decodable {
     let body: MultiGet
+    let code: Int
 }
 
 struct MultiGet: Decodable {
-    let id, title, category_id: String
-    let price: Int
-    let thumbnail: String
+    let id, title, thumbnail,  category_id, condition: String
+    let price: Float
+    let pictures: [Picture]
+    let seller_address: SearchLocation
+}
+
+struct Picture: Decodable {
+    let url: String
+}
+
+struct SearchLocation: Decodable {
+    let search_location: State
+}
+
+struct State: Decodable {
+    let state: StateName
+}
+
+struct StateName: Decodable {
+    let name: String
 }
 
