@@ -25,6 +25,8 @@ struct MultiGetResponse: Decodable {
 }
 
 struct MultiGet: Decodable {
-  let id, title, category_id: String
-  let price: Int
+    let id, title, category_id: String
+    let price: Int
+    let thumbnail: String
 }
+

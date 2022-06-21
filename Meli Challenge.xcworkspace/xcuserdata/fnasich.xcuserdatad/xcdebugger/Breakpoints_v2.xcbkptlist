@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "18E92C1D-0E91-4DA3-A973-76D17F10BD1C"
+            uuid = "F41E77B7-D81D-4353-8379-69E1A4202D2E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Meli Challenge/Modules/StartView/ViewModel/StartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "getTop20(categoryId:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "getCategory()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

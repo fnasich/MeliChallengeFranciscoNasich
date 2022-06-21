@@ -13,6 +13,7 @@ class StartViewModel {
     private var service2: Top20Service
     private var service3: MultiGetService
     private var top20 = [TopTwentyCategory]()
+     var products: [MultiGet] = []
     
     init(service: StartViewService, delegate: StartViewDelegate, service2: Top20Service, service3: MultiGetService) {
         self.service = service
@@ -27,9 +28,10 @@ class StartViewModel {
             SearchTextManager.shared.categoryValue = category
             self.getTop20(categoryId: category)
             self.delegate.loadData()
-            print("ESTA ES LA CATEGORIA \(category)")
+//            print("ESTA ES LA CATEGORIA \(category)")
         } onError: {
-            print("Error getCategory")
+            self.delegate.showMessage(message: "Error de búsqueda")
+            print("ERROR GETCATEGORY")
         }
         
     }
@@ -37,26 +39,26 @@ class StartViewModel {
     func getTop20(categoryId: String) {
         service2.getTopTwenty(categoryId: categoryId) { top in
             self.top20 = top
+            self.products.removeAll()
             print("ESTE ES TOP: \(top)")
             top.forEach { topId in
                 SearchTextManager.shared.multiGetId.append("\(topId.id)")
                 self.service3.multiGet(productId: topId) { infoId in
-                    print("INFO TOPID: \(infoId)")
-                } onError: {
-                    print("getMultiGet ERROR")
+                    self.products.append(infoId)
+//                    print("INFO TOPID: \(infoId)")
+                } onError: {errorMessage in
+                    self.delegate.showMessage(message: errorMessage)
+                    print("ERROR TOP20 1")
                 }
-                
             }
-            
-            // Agregar llamado de servicio multiGet
-            
         } onError: {
-            print("getTop20 ERROR")
+            self.delegate.showMessage(message: genericError)
+            print("ERROR TOP20 2")
         }
     }
     
-    func productList(at index: Int) -> TopTwentyCategory {
-        top20[index]
+    func productList(at index: Int) -> MultiGet {
+        products[index]
     }
     
     func top20Count() -> Int {

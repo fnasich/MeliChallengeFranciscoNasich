@@ -8,6 +8,7 @@
 import UIKit
 protocol StartViewDelegate {
     func loadData()
+    func showMessage(message:String)
 }
 
 class StartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -46,7 +47,12 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: Cell For Row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StartTableViewCell
-        cell.label?.text = self.viewModel?.productList(at: indexPath.row).id
+        cell.titleProduct?.text = self.viewModel?.productList(at: indexPath.row).title
+        cell.priceProduct.text = self.viewModel?.productList(at: indexPath.row).id
+        
+        //        if let url = self.viewModel?.productList(at: indexPath.row).thumbnail, let fullUrl = URL(string: url) {
+        //            cell.imageCar.load(url: fullUrl)
+        //        }
         
         return cell
     }
@@ -54,7 +60,7 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: Did Select Row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //        let product = arreglo[indexPath.row]
+        //        let product = self.viewModel?.productList(at: indexPath.row)
         //        let productDetail = DetailViewController()
         
     }
@@ -64,6 +70,7 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
         SearchTextManager.shared.searchValue = searchLabel.text!.lowercased()
         SearchTextManager.shared.multiGetId.removeAll()
         viewModel?.getCategory()
+        tableView.reloadData()
     }
 }
 
@@ -73,4 +80,9 @@ extension StartViewController: StartViewDelegate {
         tableView.reloadData()
     }
     
+    func showMessage(message:String) {
+        let alert = UIAlertController(title: "An error has been ocurred", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
