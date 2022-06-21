@@ -47,12 +47,14 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: Cell For Row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StartTableViewCell
+        let priceInt = Int((viewModel?.productList(at: indexPath.row).price)!)
+        let price = isMultipleOfTen(numero: priceInt)
+        
+        
         cell.titleProduct?.text = self.viewModel?.productList(at: indexPath.row).title
-        cell.priceProduct.text = "\(String(describing: self.viewModel!.productList(at: indexPath.row).price))"
+        cell.priceProduct.text = "$\(String(describing: price))"
         cell.condition.text = self.viewModel?.productList(at: indexPath.row).condition
-        
         cell.location.text = self.viewModel?.productList(at: indexPath.row).seller_address.search_location.state.name
-        
         
         if let url = self.viewModel?.productList(at: indexPath.row).pictures[0].url, let fullUrl = URL(string: url) {
             cell.imageCar.load(url: fullUrl)
@@ -61,18 +63,26 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    func isMultipleOfTen(numero: Int) -> Int {
+        if numero.isMultiple(of: 10) {
+            return numero
+        } else {
+            return numero + 1
+        }
+    }
+    
     // MARK: Did Select Row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //        let product = self.viewModel?.productList(at: indexPath.row)
-        //        let productDetail = DetailViewController()
-        
+        let productDetail = DetailViewController()
+        productDetail.title = viewModel?.productList(at: indexPath.row).title
+        productDetail.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(productDetail, animated: true)
     }
     
     // MARK: Search Bar Button Clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         SearchTextManager.shared.searchValue = searchLabel.text!.lowercased()
-        //        SearchTextManager.shared.multiGetId.removeAll()
         viewModel?.getCategory()
     }
 }
