@@ -11,22 +11,26 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var titleProduct: UILabel!
     @IBOutlet weak var imageProduct: UIImageView!
     @IBOutlet weak var priceProduct: UILabel!
+    @IBOutlet weak var preguntarButton: UIButton!
+    @IBOutlet weak var whatsappButton: UIButton!
     
     var detail: MultiGet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         showData()
+        navigationBarStyle()
+        preguntarButton.layer.cornerRadius = 6
+        whatsappButton.layer.cornerRadius = 6
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    @IBAction func backButton
-    (_ sender: Any) {
-        let tabBar = StartViewController()
-        navigationController?.pushViewController(tabBar, animated: true)
+    func navigationBarStyle() {
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "chevron.left")
+        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
     }
     
     func showData() {

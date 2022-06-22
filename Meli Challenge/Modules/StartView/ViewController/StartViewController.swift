@@ -68,8 +68,8 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let productDetail = DetailViewController()
-        productDetail.detail = viewModel?.productList(at: indexPath.row)
-        productDetail.title = viewModel?.productList(at: indexPath.row).title
+        let product = self.viewModel?.productList(at: indexPath.row)
+        productDetail.detail = product
         productDetail.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(productDetail, animated: true)
     }
@@ -87,7 +87,7 @@ extension StartViewController: StartViewDelegate {
     }
     
     func showMessage(message:String) {
-        let alert = UIAlertController(title: "An error has been ocurred", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ha ocurrido un error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

@@ -21,6 +21,7 @@ struct TopTwentyCategory: Decodable {
 }
 
 struct MultiGetResponse: Decodable {
+    let code: Int
     let body: MultiGet
 }
 
