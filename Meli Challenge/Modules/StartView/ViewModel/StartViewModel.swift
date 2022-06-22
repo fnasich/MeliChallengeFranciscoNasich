@@ -28,7 +28,6 @@ class StartViewModel {
             SearchTextManager.shared.categoryValue = category
             self.getTop20(categoryId: category)
             self.delegate.loadData()
-//            print("ESTA ES LA CATEGORIA \(category)")
         } onError: {
             self.delegate.showMessage(message: "Error de búsqueda")
             print("ERROR GETCATEGORY")

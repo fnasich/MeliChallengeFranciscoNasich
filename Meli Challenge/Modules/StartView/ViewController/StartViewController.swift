@@ -9,6 +9,7 @@ import UIKit
 protocol StartViewDelegate {
     func loadData()
     func showMessage(message:String)
+    func isMultipleOfTen(numero: Int) -> Int
 }
 
 class StartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -63,18 +64,11 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
-    func isMultipleOfTen(numero: Int) -> Int {
-        if numero.isMultiple(of: 10) {
-            return numero
-        } else {
-            return numero + 1
-        }
-    }
-    
     // MARK: Did Select Row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let productDetail = DetailViewController()
+        productDetail.detail = viewModel?.productList(at: indexPath.row)
         productDetail.title = viewModel?.productList(at: indexPath.row).title
         productDetail.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(productDetail, animated: true)
@@ -88,7 +82,6 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
 }
 
 extension StartViewController: StartViewDelegate {
-    
     func loadData() {
         tableView.reloadData()
     }
@@ -97,5 +90,13 @@ extension StartViewController: StartViewDelegate {
         let alert = UIAlertController(title: "An error has been ocurred", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func isMultipleOfTen(numero: Int) -> Int {
+        if numero.isMultiple(of: 10) {
+            return numero
+        } else {
+            return numero + 1
+        }
     }
 }
