@@ -91,7 +91,7 @@ extension DetailViewController: DetailDelegate {
         titleProduct.text = product.title
         priceProduct.text = showData(price: product.price)
         quantityButton.titleLabel?.text = "Cantidad: 1  (\(product.available_quantity) disponibles)"
-        descriptionText.text = viewModelDescription?.showDecription().description
+        descriptionText.text = viewModelDescription!.showDecription().description
         
         let url = product.pictures[0].url
         let fullUrl = URL(string: url)!

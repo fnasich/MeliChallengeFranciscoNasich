@@ -19,9 +19,8 @@ class DescriptionViewModel {
     
     func getDescription(){
         service.getDescription(productId: productId) { detail in
-            let d = detail.plain_text
-            print(d)
-            self.description = d!
+            let d = detail.plain_text!
+            self.description = d
         } onError: { errorMessage in
             print("error description: \(errorMessage)")
         }

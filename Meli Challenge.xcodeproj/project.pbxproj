@@ -103,6 +103,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E823F3FD2864D2560031E608 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E8A91E842859134800793D91 /* DetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E823F3FE2864D25C0031E608 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E8B720002864ABE300EFE841 /* DetailViewModel.swift */,
+				E8B71FFC2864A4B500EFE841 /* DescriptionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E823F3FF2864D2620031E608 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E8B71FFE2864AB6B00EFE841 /* DetailService.swift */,
+				E8B71FFA2864A03A00EFE841 /* DescriptionService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		E823F4002864D29F0031E608 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8A91E852859134800793D91 /* DetailViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E86E01DA2858D2FB00AD8296 = {
 			isa = PBXGroup;
 			children = (
@@ -198,8 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				E8AA34AF285B85A200BAB069 /* StartViewModel.swift */,
-				E8B71FFC2864A4B500EFE841 /* DescriptionViewModel.swift */,
-				E8B720002864ABE300EFE841 /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -219,8 +251,6 @@
 				E8AA34AA285B810000BAB069 /* StartViewService.swift */,
 				E8AB6C3B285D106D00BE9482 /* TopTwentyService.swift */,
 				E8AB6C3F285D237400BE9482 /* MultiGetService.swift */,
-				E8B71FFA2864A03A00EFE841 /* DescriptionService.swift */,
-				E8B71FFE2864AB6B00EFE841 /* DetailService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -236,8 +266,10 @@
 		E8AA34A9285B803800BAB069 /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
-				E8A91E842859134800793D91 /* DetailViewController.swift */,
-				E8A91E852859134800793D91 /* DetailViewController.xib */,
+				E823F4002864D29F0031E608 /* View */,
+				E823F3FF2864D2620031E608 /* Service */,
+				E823F3FE2864D25C0031E608 /* ViewModel */,
+				E823F3FD2864D2560031E608 /* ViewController */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
