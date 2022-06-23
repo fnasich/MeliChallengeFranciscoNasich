@@ -8,5 +8,5 @@
 import Foundation
 
 struct CategoryPreditor: Decodable {
-    let category_id: String
+    let category_id: String?
 }

@@ -20,10 +20,13 @@ class StartViewService {
                     if let data = data{
                         let decoder = JSONDecoder()
                         let categoryResponse = try decoder.decode([CategoryPreditor].self, from: data)
-//                        print("CATEGORIES: \(categoryResponse[0].category_id)")
-
-                        SearchTextManager.shared.categoryValue = categoryResponse[0].category_id
-                        onComplete(categoryResponse[0].category_id)
+        
+                        guard let categoryTemp = categoryResponse[0].category_id else {
+                            preconditionFailure("Error")
+                        }
+                        
+                        SearchTextManager.shared.categoryValue = categoryTemp
+                        onComplete(categoryTemp)
                     }else{
                         onError()
                     }

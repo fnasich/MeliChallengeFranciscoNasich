@@ -16,6 +16,7 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var searchLabel: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cartButton: UIImageView!
     
     private var viewModel: StartViewModel?
     var service = StartViewService()
@@ -83,19 +84,23 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let productDetail = DetailViewController()
         let product = self.viewModel?.productList(at: indexPath.row).id
         productDetail.detailId = product
-        productDetail.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(productDetail, animated: true)
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let responseCode = viewModel?.productList(at: indexPath.row).
-//        let rowHeight = (responseCode == 404) ? 0 : 150
-//        return CGFloat(rowHeight)
-//      }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        searchBar.tintColor = .black
+        cartButton.isHidden = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+    }
     
     // MARK: Search Bar Button Clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         SearchTextManager.shared.searchValue = searchLabel.text!.lowercased()
+        
         viewModel?.getCategory()
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 protocol DetailDelegate {
     func loadProductData(product: MultiGet)
+    func spinnerLoadingState(state: Bool)
 }
 
 class DetailViewController: UIViewController {
@@ -19,48 +20,28 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var priceProduct: UILabel!
     @IBOutlet weak var quantityButton: UIButton!
     @IBOutlet weak var buyNowButton: UIButton!
-    @IBOutlet weak var favButton2: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
     
     var detailId: String?
     private var viewModelDescription: DescriptionViewModel?
     private var viewModelDetail: DetailViewModel?
-    private var isCouponFav = UserDefaults.standard.bool(forKey: "isCouponFav")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBarStyle()
+        spinnerLoadingState(state: true)
         
         if let id = detailId {
-                    self.viewModelDescription = DescriptionViewModel(service: DescriptionService(), productId: id)
+            self.viewModelDescription = DescriptionViewModel(service: DescriptionService(), productId: id)
             self.viewModelDetail = DetailViewModel(service: DetailService(), productId: id, delegate: self)
             self.viewModelDescription?.getDescription()
             self.viewModelDetail?.getDetails()
-                }
-        
-        quantityButton.layer.cornerRadius = 6
-        buyNowButton.layer.cornerRadius = 6
+        }
     }
     
     func configureUI() {
-         let image = UIImage(systemName: "heart")
-         let imageFilled = UIImage(systemName: "heart.fill")
-        favButton2.setImage(image, for: .normal)
-        favButton2.setImage(imageFilled, for: .selected)
-     }
-    
-    @IBAction func favoritesButton(_ sender: UIButton) {
-        if isCouponFav {
-            let image = UIImage(systemName: "heart")
-            sender.setImage(image, for: .normal)
-        } else {
-            let image = UIImage(systemName: "heart.fill")
-            sender.setImage(image, for: .normal)
-        }
-
-        isCouponFav = !isCouponFav
-        UserDefaults.standard.set(isCouponFav, forKey: "isCouponFav")
-        UserDefaults.standard.synchronize()
+        quantityButton.layer.cornerRadius = 6
+        buyNowButton.layer.cornerRadius = 6
     }
     
     func navigationBarStyle() {
@@ -110,11 +91,14 @@ extension DetailViewController: DetailDelegate {
         titleProduct.text = product.title
         priceProduct.text = showData(price: product.price)
         quantityButton.titleLabel?.text = "Cantidad: 1  (\(product.available_quantity) disponibles)"
+        descriptionLabel.text = viewModelDescription?.showDecription().description
         
         let url = product.pictures[0].url
         let fullUrl = URL(string: url)!
         imageProduct.load(url: fullUrl)
     }
     
-    
+    func spinnerLoadingState(state: Bool) {
+        state ? self.showSpinner(onView: self.view) : self.removeSpinner()
+    }
 }

@@ -8,10 +8,10 @@
 import Foundation
 
 class StartViewModel {
-    private var service: StartViewService
+    private var service: StartViewService?
     private var delegate: StartViewDelegate
-    private var service2: Top20Service
-    private var service3: MultiGetService
+    private var service2: Top20Service?
+    private var service3: MultiGetService?
     private var top20 = [String]()
     private var products: [MultiGet] = []
     
@@ -23,11 +23,13 @@ class StartViewModel {
     }
     
     func getCategory() {
-        service.getCategories { category in
-            let category = category
-            SearchTextManager.shared.categoryValue = category
-            self.getTop20(categoryId: category)
-            self.delegate.loadData()
+        service?.getCategories { category in
+            DispatchQueue.main.async { [weak self] in
+                let category = category
+                SearchTextManager.shared.categoryValue = category
+                self?.getTop20(categoryId: category)
+                self?.delegate.loadData()
+            }
         } onError: {
             self.delegate.showMessage(message: "Error de búsqueda")
             print("ERROR GETCATEGORY")
@@ -36,13 +38,16 @@ class StartViewModel {
     }
     
     func getTop20(categoryId: String) {
-        service2.getTopTwenty(categoryId: categoryId) { top in
-            self.top20 = top
-            self.products.removeAll()
-            print("ESTE ES TOP: \(top)")
-            top.forEach { topId in
-                self.getMultiGet(id: topId)
+        service2?.getTopTwenty(categoryId: categoryId) { top in
+            DispatchQueue.main.async { [weak self] in
+                self?.top20 = top
+                self?.products.removeAll()
+                print("ESTE ES TOP: \(top)")
+                top.forEach { topId in
+                    self?.getMultiGet(id: topId)
+                }
             }
+
         } onError: {
             self.delegate.showMessage(message: genericError)
             print("ERROR TOP20")
@@ -51,8 +56,10 @@ class StartViewModel {
     
     func getMultiGet(id: String) {
         SearchTextManager.shared.multiGetId.append(id)
-        self.service3.multiGet(productId: id) { infoId in
-            self.products.append(contentsOf: infoId)
+        self.service3?.multiGet(productId: id) { infoId in
+            DispatchQueue.main.async { [weak self] in
+                self?.products.append(contentsOf: infoId)
+            }
             
         } onError: { errorMessage in
             self.delegate.showMessage(message: errorMessage)
