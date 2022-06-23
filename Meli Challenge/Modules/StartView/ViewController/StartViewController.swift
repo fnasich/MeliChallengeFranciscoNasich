@@ -10,6 +10,7 @@ protocol StartViewDelegate {
     func loadData()
     func showMessage(message:String)
     func isMultipleOfTen(numero: Int) -> Int
+    func showData(price: Float) -> String
 }
 
 class StartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -49,26 +50,11 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: Cell For Row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StartTableViewCell
-        let priceInt = Int((viewModel?.productList(at: indexPath.row).price)!)
-        let price = isMultipleOfTen(numero: priceInt)
-        var priceString = "$\(String(describing: price))"
-        
-        switch priceString.count {
-        case  5 :
-            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 2))
-        case 6 :
-            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 3))
-        case 7 :
-            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 4))
-        case 8 :
-            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 5))
-        default:
-            priceString
-        }
+        let priceInt = viewModel?.productList(at: indexPath.row).price
         
         cell.titleProduct?.text = self.viewModel?.productList(at: indexPath.row).title
-        cell.priceProduct.text = priceString
-        cell.condition.text = self.viewModel?.productList(at: indexPath.row).condition
+        cell.priceProduct.text = showData(price: priceInt!)
+        cell.condition.text = self.viewModel?.productList(at: indexPath.row).condition  == "new" ? "Nuevo" : "Usado"
         cell.location.text = self.viewModel?.productList(at: indexPath.row).seller_address.search_location.state.name
         
         if let url = self.viewModel?.productList(at: indexPath.row).pictures[0].url, let fullUrl = URL(string: url) {
@@ -100,7 +86,6 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: Search Bar Button Clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         SearchTextManager.shared.searchValue = searchLabel.text!.lowercased()
-        
         viewModel?.getCategory()
     }
 }
@@ -122,5 +107,25 @@ extension StartViewController: StartViewDelegate {
         } else {
             return numero + 1
         }
+    }
+    
+    func showData(price: Float) -> String {
+        let priceInt = Int(price)
+        let price = isMultipleOfTen(numero: priceInt)
+        var priceString = "$\(String(describing: price))"
+        
+        switch priceString.count {
+        case  5 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 2))
+        case 6 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 3))
+        case 7 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 4))
+        case 8 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 5))
+        default:
+            priceString
+        }
+        return priceString
     }
 }
