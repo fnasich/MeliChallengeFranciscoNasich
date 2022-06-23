@@ -10,7 +10,7 @@ import Alamofire
 
 class ApiManager {
     static let shared = ApiManager()
-    let token = "APP_USR-4325235147590421-062217-80a6153ec7c1f7a0b23161e9e1668504-245649044"
+    let token = "APP_USR-4325235147590421-062308-6b8b01893bd8d172bdff1f5a993fb4a1-245649044"
     
     func get(url: String, completion: @escaping (Result<Data?, AFError>) -> Void) {
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]

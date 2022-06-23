@@ -1,16 +1,15 @@
 //
-//  MultiGetService.swift
+//  DetailService.swift
 //  Meli Challenge
 //
-//  Created by Francisco Tomas Nasich on 17/06/2022.
+//  Created by Francisco Tomas Nasich on 23/06/2022.
 //
 
 import Foundation
 
-class MultiGetService {
-    func multiGet(productId: String,onComplete: @escaping ([MultiGet]) -> Void, onError: @escaping (ErrorHandler)) {
-        let stringRepresentation = SearchTextManager.shared.multiGetId.joined(separator: ",")
-        let url = Constants.multigetURL + stringRepresentation
+class DetailService {
+    func getDetail(productId: String,onComplete: @escaping ([MultiGet]) -> Void, onError: @escaping (ErrorHandler)) {
+        let url = Constants.multigetURL + productId
         ApiManager.shared.get(url: url) {response in
             switch response {
             case .success(let data):
@@ -20,8 +19,7 @@ class MultiGetService {
                     if let data = data{
                         let decoder = JSONDecoder()
                         let multiGetResponse = try decoder.decode([MultiGetResponse].self, from: data)
-                        let productCode = multiGetResponse.filter { $0.code == 200 }
-                        let productsData = productCode.map {$0.body}
+                        let productsData = multiGetResponse.map {$0.body}
                         onComplete(productsData)
                     }else{
                         onError(genericError)
@@ -37,6 +35,3 @@ class MultiGetService {
         }
     }
 }
-
-let genericError = "Error de búsqueda"
-typealias ErrorHandler = (_ errorMessage: String) -> Void

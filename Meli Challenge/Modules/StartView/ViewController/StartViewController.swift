@@ -81,11 +81,17 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let productDetail = DetailViewController()
-        let product = self.viewModel?.productList(at: indexPath.row)
-        productDetail.detail = product
+        let product = self.viewModel?.productList(at: indexPath.row).id
+        productDetail.detailId = product
         productDetail.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(productDetail, animated: true)
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let responseCode = viewModel?.productList(at: indexPath.row).
+//        let rowHeight = (responseCode == 404) ? 0 : 150
+//        return CGFloat(rowHeight)
+//      }
     
     // MARK: Search Bar Button Clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

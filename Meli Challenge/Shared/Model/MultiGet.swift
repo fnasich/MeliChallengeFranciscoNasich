@@ -1,24 +1,11 @@
 //
-//  ProductModel.swift
+//  MultiGet.swift
 //  Meli Challenge
 //
-//  Created by Francisco Tomas Nasich on 16/06/2022.
+//  Created by Francisco Tomas Nasich on 23/06/2022.
 //
 
 import Foundation
-
-
-struct CategoryPreditor: Decodable {
-    let category_id: String
-}
-
-struct TopTwentyResponse: Decodable {
-    let content: [TopTwentyCategory]
-}
-
-struct TopTwentyCategory: Decodable {
-    let id: String
-}
 
 struct MultiGetResponse: Decodable {
     let code: Int
@@ -28,6 +15,7 @@ struct MultiGetResponse: Decodable {
 struct MultiGet: Decodable {
     let id, title, thumbnail,  category_id, condition: String
     let price: Float
+    let available_quantity, sold_quantity: Int
     let pictures: [Picture]
     let seller_address: SearchLocation
 }
@@ -47,4 +35,3 @@ struct State: Decodable {
 struct StateName: Decodable {
     let name: String
 }
-
