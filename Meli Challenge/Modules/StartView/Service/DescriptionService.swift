@@ -19,8 +19,8 @@ class DescriptionService {
                     
                     if let data = data{
                         let decoder = JSONDecoder()
-                        let descriptionResponse = try decoder.decode(DescriptionModel.self, from: data)
-                        let productsDescription = descriptionResponse.body
+                        let descriptionResponse = try decoder.decode([DescriptionModel].self, from: data)
+                        let productsDescription = descriptionResponse[0].body
                         print(productsDescription)
                         onComplete(productsDescription)
                     }else{

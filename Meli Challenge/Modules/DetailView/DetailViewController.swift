@@ -20,7 +20,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var priceProduct: UILabel!
     @IBOutlet weak var quantityButton: UIButton!
     @IBOutlet weak var buyNowButton: UIButton!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionText: UITextView!
     
     var detailId: String?
     private var viewModelDescription: DescriptionViewModel?
@@ -91,7 +91,7 @@ extension DetailViewController: DetailDelegate {
         titleProduct.text = product.title
         priceProduct.text = showData(price: product.price)
         quantityButton.titleLabel?.text = "Cantidad: 1  (\(product.available_quantity) disponibles)"
-        descriptionLabel.text = viewModelDescription?.showDecription().description
+        descriptionText.text = viewModelDescription?.showDecription().description
         
         let url = product.pictures[0].url
         let fullUrl = URL(string: url)!
