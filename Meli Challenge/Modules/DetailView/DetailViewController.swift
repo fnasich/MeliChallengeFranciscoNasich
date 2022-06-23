@@ -8,6 +8,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    @IBOutlet weak var subTitleProduct: UILabel!
     @IBOutlet weak var titleProduct: UILabel!
     @IBOutlet weak var imageProduct: UIImageView!
     @IBOutlet weak var priceProduct: UILabel!
@@ -25,7 +26,6 @@ class DetailViewController: UIViewController {
     }
     
     func navigationBarStyle() {
-        self.navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "chevron.left")
         self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -36,9 +36,24 @@ class DetailViewController: UIViewController {
     func showData() {
         let priceInt = Int((detail?.price)!)
         let price = isMultipleOfTen(numero: priceInt)
+        var priceString = "$\(String(describing: price))"
         
+        switch priceString.count {
+        case  5 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 2))
+        case 6 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 3))
+        case 7 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 4))
+        case 8 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 5))
+        default:
+            priceString
+        }
+        
+        subTitleProduct.text = self.detail?.title
         titleProduct.text = self.detail?.title
-        priceProduct.text = "$\(String(describing: price))"
+        priceProduct.text = priceString
         
         if let url = detail?.pictures[0].url, let fullUrl = URL(string: url) {
             imageProduct.load(url: fullUrl)
@@ -46,6 +61,7 @@ class DetailViewController: UIViewController {
     }
     
     func isMultipleOfTen(numero: Int) -> Int {
+        
         if numero.isMultiple(of: 10) {
             return numero
         } else {
@@ -54,3 +70,4 @@ class DetailViewController: UIViewController {
     }
     
 }
+

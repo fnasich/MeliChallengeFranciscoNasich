@@ -53,6 +53,7 @@ class StartViewModel {
         SearchTextManager.shared.multiGetId.append(id)
         self.service3.multiGet(productId: id) { infoId in
             self.products.append(contentsOf: infoId)
+            
         } onError: { errorMessage in
             self.delegate.showMessage(message: errorMessage)
             print("ERROR MULTI GET")

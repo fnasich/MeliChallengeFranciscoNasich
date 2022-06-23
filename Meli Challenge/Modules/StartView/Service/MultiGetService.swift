@@ -11,31 +11,34 @@ class MultiGetService {
     func multiGet(productId: String,onComplete: @escaping ([MultiGet]) -> Void, onError: @escaping (ErrorHandler)) {
         let stringRepresentation = SearchTextManager.shared.multiGetId.joined(separator: ",")
         let url = Constants.multigetURL + stringRepresentation
-            ApiManager.shared.get(url: url) {response in
-                switch response {
-                case .success(let data):
+        ApiManager.shared.get(url: url) {response in
+            switch response {
+            case .success(let data):
+                
+                do{
                     
-                    do{
-                        
-                        if let data = data{
-                            let decoder = JSONDecoder()
-                            let multiGetResponse = try decoder.decode([MultiGetResponse].self, from: data)
-                            let productsData = multiGetResponse.map {response in response.body}
-                            onComplete(productsData)
-                        }else{
-                            onError(genericError)
-                        }
-                    } catch{
+                    if let data = data{
+                        let decoder = JSONDecoder()
+                        let multiGetResponse = try decoder.decode([MultiGetResponse].self, from: data)
+//                        let productCode = multiGetResponse.filter { response in
+//                            response.code == 200
+//                        }
+                        let productsData = multiGetResponse.map {response in response.body}
+                        onComplete(productsData)
+                    }else{
                         onError(genericError)
-                        print(error)
                     }
-                    
-                case .failure(let error):
-                    onError(error.errorDescription ?? genericError)
+                } catch{
+                    onError(genericError)
+                    print(error)
                 }
+                
+            case .failure(let error):
+                onError(error.errorDescription ?? genericError)
             }
         }
     }
+}
 
 let genericError = "Error de búsqueda"
 typealias ErrorHandler = (_ errorMessage: String) -> Void

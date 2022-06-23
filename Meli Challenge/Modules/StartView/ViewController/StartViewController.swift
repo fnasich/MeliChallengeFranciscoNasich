@@ -50,10 +50,23 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StartTableViewCell
         let priceInt = Int((viewModel?.productList(at: indexPath.row).price)!)
         let price = isMultipleOfTen(numero: priceInt)
+        var priceString = "$\(String(describing: price))"
         
+        switch priceString.count {
+        case  5 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 2))
+        case 6 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 3))
+        case 7 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 4))
+        case 8 :
+            priceString.insert(".", at: priceString.index(priceString.startIndex, offsetBy: 5))
+        default:
+            priceString
+        }
         
         cell.titleProduct?.text = self.viewModel?.productList(at: indexPath.row).title
-        cell.priceProduct.text = "$\(String(describing: price))"
+        cell.priceProduct.text = priceString
         cell.condition.text = self.viewModel?.productList(at: indexPath.row).condition
         cell.location.text = self.viewModel?.productList(at: indexPath.row).seller_address.search_location.state.name
         
