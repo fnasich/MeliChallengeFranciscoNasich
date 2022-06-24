@@ -14,9 +14,7 @@ class MultiGetService {
         ApiManager.shared.get(url: url) {response in
             switch response {
             case .success(let data):
-                
                 do{
-                    
                     if let data = data{
                         let decoder = JSONDecoder()
                         let multiGetResponse = try decoder.decode([MultiGetResponse].self, from: data)

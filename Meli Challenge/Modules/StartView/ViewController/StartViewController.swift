@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+//MARK: Protocol Start View Delegate
 protocol StartViewDelegate {
     func loadData()
     func showMessage(message:String)
@@ -73,12 +75,14 @@ class StartViewController: UIViewController, UITableViewDelegate, UITableViewDat
         navigationController?.pushViewController(productDetail, animated: true)
     }
     
+    // MARK: Search Bar Text Begin Editing
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
         searchBar.tintColor = .black
         cartButton.isHidden = true
     }
     
+    // MARK: Search Bar Cancel Button Clicked
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
     }

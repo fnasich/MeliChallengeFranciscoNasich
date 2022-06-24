@@ -7,8 +7,9 @@
 
 import Foundation
 
+//MARK: Url Constants
 struct Constants {
-static let categoryPreditorURL = "https://api.mercadolibre.com/sites/MLA/domain_discovery/search?limit=5&q="
-static let topTwentyURL = "https://api.mercadolibre.com/highlights/MLA/category/"
-static let multigetURL = "https://api.mercadolibre.com/items?ids="
+    static let categoryPreditorURL = "https://api.mercadolibre.com/sites/MLA/domain_discovery/search?limit=5&q="
+    static let topTwentyURL = "https://api.mercadolibre.com/highlights/MLA/category/"
+    static let multigetURL = "https://api.mercadolibre.com/items?ids="
 }
